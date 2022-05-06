@@ -10,7 +10,7 @@ REQUIREMENTS:
 ```
 	=if(not(isblank(A2)),concatenate(text(E2,"mm/dd/yyyy")&" "&text(G2,"hh:mm:ss")),"")
 ```
-- The master sheet must have up to column L, and first row as labels.
+- The master sheet must have up to column L, and first row as labels (see master_sheet.csv)
 - An existing Google Calendar.
 - Links in main() must be updated with the appropriate Google Sheet and Google Calendar to be accessed by the user.
 

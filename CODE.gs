@@ -333,13 +333,7 @@ function makeCalendarEvents(spreadsheet, sheets_list, eventCal) {
       var status = "success"
       return status
     }
-
-
-    
-    
-
   }
-
 }
 
 // send emails to user notifying status.
@@ -390,7 +384,6 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
         var arrayEvents = eventCal.getEvents(cotdate, rtdate)
         for(i=0; i<arrayEvents.length; i++) {
           var title = arrayEvents[i].getTitle()
-
 
           // if vehicle is reserved for any of those events,
           if(title.includes(vehicle)) {
@@ -452,8 +445,7 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
               + links,
               cc: "montesst@usc.edu, libsec@usc.edu, jpark802@usc.edu"}
             )
-          }
-        
+          }        
       }
     
     // set email done as "y"

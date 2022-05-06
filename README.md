@@ -13,6 +13,7 @@ REQUIREMENTS:
 - The master sheet must have up to column L, and first row as labels (see master_sheet.csv)
 - An existing Google Calendar.
 - Links in main() must be updated with the appropriate Google Sheet and Google Calendar to be accessed by the user.
+- User should create a trigger to run code on form submit.
 
 FEATURES:
 - Combines data from all form-linked sheets into single master sheet.

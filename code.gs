@@ -414,6 +414,7 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
           {to: email,
           subject: "Denied: USC Libraries Vehicle Request for " + name,
           htmlBody: "Dear " + name + ",<br><br>"
+          + "REQ#: " + reqNum + "<br><br>"
           + "The vehicle you requested:<br><br>"
           + vehicle + "<br><br>is not available at the times you selected."
           + "<br><br>Please note the following conflicts:<br><br>"
@@ -428,6 +429,7 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
             {to: email,
             subject: "Confirmed: USC Libraries Vehicle Request for " + name,
             htmlBody: "Dear " + name + ",<br><br>"
+            + "REQ#: " + reqNum + "<br><br>"
             + "This is to confirm your reservation for:<br><br>"
             + vehicle + "<br><br>from " + cotstring + " to " + rtstring + "."
             + cancel + links,
@@ -442,6 +444,7 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
               {to: email,
               subject: "Invalid times: USC Libraries Vehicle Request for " + name,
               htmlBody: "Dear " + name + ",<br><br>"
+              + "REQ#: " + reqNum + "<br><br>"
               + "Your reservation is invalid as you entered invalid times.<br><br>Here are the times you entered:<br><br>" 
               + "Checkout: " + cotstring
               + "<br><br>Return: " + rtstring

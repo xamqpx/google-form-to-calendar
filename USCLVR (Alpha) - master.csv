@@ -1,0 +1,16 @@
+Timestamp,Email,Name,Vehicle,Check Out Day,Check Out Time,Return Time,Combined COT,Combined RT,Request #,done?,email sent?
+4/29/2022 13:43:14,libsec@usc.edu,Connor Hill,#001 - EzGo Shuttle II (Green Flat bed),4/29/2022,11:50:00,18:45:00,04/29/2022 11:50:00,04/29/2022 18:45:00,3262024351,y,y
+4/29/2022 10:45:21,libsec@usc.edu,Claude Zachary,Ford Transit Wagon 77072V1 (Rear folding seats) *Restricted Use Requires Authorization,4/29/2022,12:40:00,17:30:00,04/29/2022 12:40:00,04/29/2022 17:30:00,8862198849,y,y
+4/29/2022 10:44:46,libsec@usc.edu,Stephen Hanson,Ford Transit Connect Cargo 78192E1 (No rear seats),4/29/2022,17:30:00,18:40:00,04/29/2022 17:30:00,04/29/2022 18:40:00,3220639489,y,y
+4/29/2022 10:43:32,libsec@usc.edu,Claudia Montecinos,Chevrolet Express 8P10083 (Large Cargo Van),4/29/2022,14:42:00,18:20:00,04/29/2022 14:42:00,04/29/2022 18:20:00,6201787557,y,y
+4/29/2022 10:42:54,libsec@usc.edu,Callie Birtman,#002 - EzGo Shuttle II (Green Flat bed),4/29/2022,12:00:00,15:30:00,04/29/2022 12:00:00,04/29/2022 15:30:00,8007967255,y,y
+4/29/2022 10:41:41,libsec@usc.edu,Eugene Skibinsky,#001 - EzGo Shuttle II (Green Flat bed),4/29/2022,12:00:00,13:40:00,04/29/2022 12:00:00,04/29/2022 13:40:00,1410840031,y,y
+4/26/2022 13:42:05,libsec@usc.edu,Jonathan Park,#267 - EzGo TXT-PDS (RED Double Seat),4/26/2022,8:00:00,8:30:00,04/26/2022 08:00:00,04/26/2022 08:30:00,3736568921,y,y
+5/6/2022 12:09:43,jpark802@usc.edu,Jonathan Park,#002 - EzGo Shuttle II (Green Flat bed),5/29/2022,15:40:00,20:00:00,05/29/2022 15:40:00,05/29/2022 20:00:00,9286963431,y,y
+5/6/2022 12:18:28,jpark802@usc.edu,Jonathan Park,#002 - EzGo Shuttle II (Green Flat bed),4/29/2022,15:40:00,20:00:00,04/29/2022 15:40:00,04/29/2022 20:00:00,3824366808,y,y
+5/6/2022 13:48:22,jpark802@usc.edu,Jonathan Park,#002 - EzGo Shuttle II (Green Flat bed),4/29/2022,14:00:00,16:00:00,04/29/2022 14:00:00,04/29/2022 16:00:00,8287376665,y,y
+5/6/2022 13:53:39,jpark802@usc.edu,Jonathan Park,#002 - EzGo Shuttle II (Green Flat bed),4/29/2022,14:00:00,16:00:00,04/29/2022 14:00:00,04/29/2022 16:00:00,2283059538,y,y
+5/6/2022 13:57:26,jpark802@usc.edu,Jonathan Park,Chevrolet Express 8P10083 (Large Cargo Van),4/29/2022,11:00:00,4:00:00,04/29/2022 11:00:00,04/29/2022 04:00:00,7175687236,y,y
+5/6/2022 14:07:52,jpark802@usc.edu,Jonathan Park,Ford Transit Wagon 77072V1 (Rear folding seats) *Restricted Use Requires Authorization,4/29/2022,8:00:00,4:00:00,04/29/2022 08:00:00,04/29/2022 04:00:00,4838889184,y,y
+5/6/2022 14:12:27,jpark802@usc.edu,Jonathan Park,Chevrolet Express 8P10083 (Large Cargo Van),4/29/2022,11:00:00,14:00:00,04/29/2022 11:00:00,04/29/2022 14:00:00,2396144892,y,y
+5/6/2022 14:16:44,jpark802@usc.edu,Jonathan Park,#267 - EzGo TXT-PDS (RED Double Seat),4/29/2022,11:00:00,20:00:00,04/29/2022 11:00:00,04/29/2022 20:00:00,5786764713,y,y

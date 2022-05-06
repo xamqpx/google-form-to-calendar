@@ -1,5 +1,5 @@
 Generates calendar events from Google Form entries.
-- In this specific case, reservation requests for several vehicles are processed at once, and are either denied or turned into calendar events.
+- In this specific case, reservation requests for several vehicles (each through their own Google Form) are processed at once, and are either denied or turned into calendar events.
 
 REQUIREMENTS:
 - One existing Google Sheet connected to several Google Forms. First sheet must be the master sheet (not linked to any form); last sheet must be a completely empty worksheet. Order between first and last is irrelevant.
@@ -16,4 +16,4 @@ FEATURES:
 - Combines data from all form-linked sheets into single master sheet.
 - Notes conflicts between events, denies new entries that conflict with existing ones.
 - Generates unique request numbers for each entry.
-- (PENDING) Sends emails to requestors notifying them that the reservation was either accepted or denied.
+- Sends emails to requestors notifying them that the reservation was either accepted, denied, or invalid.

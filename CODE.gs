@@ -333,7 +333,13 @@ function makeCalendarEvents(spreadsheet, sheets_list, eventCal) {
       var status = "success"
       return status
     }
+
+
+    
+    
+
   }
+
 }
 
 // send emails to user notifying status.
@@ -341,7 +347,7 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
 
   // formatted messages including helpful information and instructions. to be sent as footnote regardless of status.
   var cancel = '<pre style="font-family: calibri; font-size: 14px; color: red">\n=\nIf you did not request this reservation, or you would like to cancel your reservation, please contact Facilities at 213-764-4135.</pre>'
-  var links = '<pre style="font-family: times-new-roman; font-size: 12px">\n=\nTo submit another request, click <a href="https://tinyurl.com/vehiclerequests">here</a>. \n\nTo access the Google Calendar, click <a href="https://tinyurl.com/usclvr">here</a>. Click on each event for more details. \n\nTo view this calendar in Outlook, follow the linked instructions to <a href="https://support.microsoft.com/en-us/office/see-your-google-calendar-in-outlook-c1dab514-0ad4-4811-824a-7d02c5e77126">subscribe to a Google Calendar on Outlook</a>. The iCal address is: \n\nhttps://calendar.google.com/calendar/ical/c_phca7kne28nksioddqnco88ibc%40group.calendar.google.com/public/basic.ics \n\nNOTE: Updates to the Google Calendar can take up to 10-20 minutes to be reflected on Outlook. Changes to the Outlook calendar will not affect the Google Calendar.\n\nPlease contact Facilities at 213-764-4135 if you have any questions or concerns. </pre>'
+  var links = '<pre style="font-family: times-new-roman; font-size: 12px">\n=\nTo submit another request, select a vehicle <a href="https://linktr.ee/usclibraryfacilities">here</a>. \n\nTo access the Google Calendar, click <a href="https://tinyurl.com/usclvr">here</a>. Click on each event for more details. \n\nTo view this calendar in Outlook, follow the linked instructions to <a href="https://support.microsoft.com/en-us/office/see-your-google-calendar-in-outlook-c1dab514-0ad4-4811-824a-7d02c5e77126">subscribe to a Google Calendar on Outlook</a>. The iCal address is: \n\nhttps://calendar.google.com/calendar/ical/c_phca7kne28nksioddqnco88ibc%40group.calendar.google.com/public/basic.ics \n\nNOTE: Updates to the Google Calendar can take up to 10-20 minutes to be reflected on Outlook. Changes to the Outlook calendar will not affect the Google Calendar.\n\nPlease contact Library Facilities at 213-764-4135 if you have any questions or concerns. </pre>'
   
   // get data and assign to variables again, including new col L tracking whether email was sent.
   var range = spreadsheet.getSheetByName(sheets_list[0]).getRange("A2:L")
@@ -385,6 +391,7 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
         for(i=0; i<arrayEvents.length; i++) {
           var title = arrayEvents[i].getTitle()
 
+
           // if vehicle is reserved for any of those events,
           if(title.includes(vehicle)) {
 
@@ -407,12 +414,11 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
           {to: email,
           subject: "Denied: USC Libraries Vehicle Request for " + name,
           htmlBody: "Dear " + name + ",<br><br>"
-          + "REQ#: " + reqNum + "<br><br>"
           + "The vehicle you requested:<br><br>"
           + vehicle + "<br><br>is not available at the times you selected."
           + "<br><br>Please note the following conflicts:<br><br>"
           + conflicting_dates + links,
-          cc: "montesst@usc.edu, libsec@usc.edu, jpark802@usc.edu"}
+          cc: "montesst@usc.edu, libsec@usc.edu, baryaaco@usc.edu"}
         )
       } else {
         if(status == "success") {
@@ -422,11 +428,10 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
             {to: email,
             subject: "Confirmed: USC Libraries Vehicle Request for " + name,
             htmlBody: "Dear " + name + ",<br><br>"
-            + "REQ#: " + reqNum + "<br><br>"
-            + "This is to confirm your reservation for:<br><br>"
-            + vehicle + "<br><br>from " + cotstring + " to " + rtstring + "."
+            + "This is to confirm your reservation for:<br><br><p>"
+            + vehicle + "</p><br><br>from " + cotstring + " to " + rtstring + "."
             + cancel + links,
-            cc: "montesst@usc.edu, libsec@usc.edu, jpark802@usc.edu"})
+            cc: "montesst@usc.edu, libsec@usc.edu, baryaaco@usc.edu"})
           
           }
 
@@ -437,15 +442,15 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
               {to: email,
               subject: "Invalid times: USC Libraries Vehicle Request for " + name,
               htmlBody: "Dear " + name + ",<br><br>"
-              + "REQ#: " + reqNum + "<br><br>"
               + "Your reservation is invalid as you entered invalid times.<br><br>Here are the times you entered:<br><br>" 
               + "Checkout: " + cotstring
               + "<br><br>Return: " + rtstring
               + "<br><br>Please confirm that checkout time is before return time. This usually occurs when entering inaccurate AM/PM values."
               + links,
-              cc: "montesst@usc.edu, libsec@usc.edu, jpark802@usc.edu"}
+              cc: "montesst@usc.edu, libsec@usc.edu, baryaaco@usc.edu"}
             )
-          }        
+          }
+        
       }
     
     // set email done as "y"
@@ -458,7 +463,7 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
 // execute
 function main() {
   var spreadsheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1oiC11wB7hq8I0feH7lEMXtLTCUsurKnJNy2EjBhvMQ8/edit?usp=sharing");
-  var eventCal = CalendarApp.getCalendarById("c_p5nepsmb6v3d2qv1h44n9tbc28@group.calendar.google.com");
+  var eventCal = CalendarApp.getCalendarById("c_e12uc461u76nmm8ovd6ipgkh1s@group.calendar.google.com");
   sheets_list = getSheets(spreadsheet)
   combineSheets(spreadsheet, sheets_list)
   Logger.log("Sheets combined.")

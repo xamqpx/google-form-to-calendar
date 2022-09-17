@@ -19,4 +19,4 @@ FEATURES:
 - Combines data from all form-linked sheets into single master sheet.
 - Notes conflicts between events, denies new entries that conflict with existing ones.
 - Generates unique request numbers for each entry.
-- Sends emails to requestors notifying them that the reservation was either accepted, denied, or invalid.
+- Sends HTML-formatted emails to requestors notifying them that the reservation was either accepted, denied, or invalid.

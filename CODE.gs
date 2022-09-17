@@ -460,6 +460,144 @@ function sendEmails(spreadsheet, sheets_list, status, eventCal) {
   }
 }
 
+function getMessageConfirmed(name, vehicle, cotstring, rtstring, reqNum) {
+  t = HtmlService.createTemplateFromFile('confirmed')
+  t.name = name
+  t.vehicle = vehicle
+  t.cotstring = cotstring
+  t.rtstring = rtstring
+  t.reqNum = reqNum
+  return t.evaluate()
+}
+
+function getMessageDenied(name, vehicle, cotstring, rtstring, conflicting_dates, reqNum) {
+  t = HtmlService.createTemplateFromFile('denied')
+  t.name = name
+  t.vehicle = vehicle
+  t.cotstring = cotstring
+  t.rtstring = rtstring
+  t.reqNum = reqNum
+  t.conflicting_dates = conflicting_dates
+  return t.evaluate()
+}
+
+function getMessageInvalid(name, vehicle, cotstring, rtstring, reqNum) {
+  t = HtmlService.createTemplateFromFile('invalid')
+  t.name = name
+  t.vehicle = vehicle
+  t.cotstring = cotstring
+  t.rtstring = rtstring
+  t.reqNum = reqNum
+  return t.evaluate()
+}
+
+function testingMail(spreadsheet, sheets_list, status, eventCal) {
+  // get data and assign to variables again, including new col L tracking whether email was sent.
+  var range = spreadsheet.getSheetByName(sheets_list[0]).getRange("A2:L")
+  var signups = range.getValues()
+
+  for(x=0; x<signups.length; x++) {
+    var shift = signups[x]
+
+    var timestamp = shift[0]
+    var email = shift[1]
+    var name = shift[2]
+    var vehicle = shift[3]
+    var cot = shift[7]
+    var cotdate = new Date(cot)
+    var cotstring = cotdate.toLocaleString('en-US', {timeZone: "America/Los_Angeles", weekday:"long", year:"numeric", month:"short", day:"numeric", hour: 'numeric', minute: 'numeric', hour12: true})
+    var rt = shift[8]
+    var rtdate = new Date(rt)
+    var rtstring = rtdate.toLocaleString('en-US', {timeZone: "America/Los_Angeles", weekday:"long", year:"numeric", month:"short", day:"numeric", hour: 'numeric', minute: 'numeric', hour12: true})
+    var reqNum = shift[9]
+    var done = shift[10]
+    var emaildone = shift[11]
+
+    // if empty row
+    if(timestamp == "") {
+      break
+    }
+
+    // if event has been processed but email not sent yet:    
+    if(done == "y" && emaildone == "") {
+
+      // if denied, aka conflicting events
+      if(status == "denied") {
+        
+        // list the conflicting events for the user.
+
+        // first create an empty list to store events.
+        var conflict_list = []
+
+        // get titles of events occurring within requested time.
+        var arrayEvents = eventCal.getEvents(cotdate, rtdate)
+        for(i=0; i<arrayEvents.length; i++) {
+          var title = arrayEvents[i].getTitle()
+
+
+          // if vehicle is reserved for any of those events,
+          if(title.includes(vehicle)) {
+
+            // get start and end times for relevant events
+            var start = arrayEvents[i].getStartTime().toLocaleString('en-US', {timeZone: "America/Los_Angeles", weekday:"long", year:"numeric", month:"short", day:"numeric", hour: 'numeric', minute: 'numeric', hour12: true})
+            var end = arrayEvents[i].getEndTime().toLocaleString('en-US', {timeZone: "America/Los_Angeles", weekday:"long", year:"numeric", month:"short", day:"numeric", hour: 'numeric', minute: 'numeric', hour12: true})
+
+            // format events as strings, add strings to list
+            conflict_list.push(title + "\r\n" + start + " to " + end)
+          }
+        }
+
+        Logger.log(conflict_list)
+
+        // convert list to string
+        var conflicting_dates = String(conflict_list.join("\r\n"))
+
+        var message = getMessageDenied(name, vehicle, cotstring, rtstring, conflicting_dates, reqNum).getContent();
+
+        // send email
+        MailApp.sendEmail(
+          {to: email,
+          subject: "Denied: USC Libraries Vehicle Request for " + name,
+          htmlBody: message,
+          cc: "montesst@usc.edu, libsec@usc.edu, baryaaco@usc.edu"}
+        )
+      } else {
+        if(status == "success") {
+
+          var message = getMessageConfirmed(name, vehicle, cotstring, rtstring, reqNum).getContent();
+
+          // send email
+          MailApp.sendEmail(
+            {to: email,
+            subject: "Confirmed: USC Libraries Vehicle Request for " + name,
+            htmlBody: message,
+            cc: "montesst@usc.edu, libsec@usc.edu, baryaaco@usc.edu"})
+          
+          }
+
+          if(status == "invalid") {
+
+            var message = getMessageInvalid(name, vehicle, cotstring, rtstring, reqNum).getContent();
+
+            // send email
+            MailApp.sendEmail(
+              {to: email,
+              subject: "Invalid times: USC Libraries Vehicle Request for " + name,
+              htmlBody: message,
+              cc: "montesst@usc.edu, libsec@usc.edu, baryaaco@usc.edu"}
+            )
+          }
+        
+      }
+    
+    // set email done as "y"
+    var range_input = spreadsheet.getSheetByName(sheets_list[0]).getRange(x+2, 12, 1, 1)
+    range_input.setValue("y")
+    }
+  }
+}
+
+
 // execute
 function main() {
   var spreadsheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1oiC11wB7hq8I0feH7lEMXtLTCUsurKnJNy2EjBhvMQ8/edit?usp=sharing");
@@ -471,7 +609,7 @@ function main() {
   Logger.log("Request numbers generated.")
   status = makeCalendarEvents(spreadsheet, sheets_list, eventCal)
   Logger.log(status)
-  sendEmails(spreadsheet, sheets_list, status, eventCal)
+  testingMail(spreadsheet, sheets_list, status, eventCal)
   Logger.log("Emails sent.")
 
 }

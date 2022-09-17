@@ -1,4 +1,4 @@
-Generates calendar events from Google Form entries.
+Generates calendar events from Google Form entries. Created for USC Libraries Facilities.
 - In this specific case, reservation requests for several vehicles (each through their own Google Form) are processed at once, and are either denied or turned into calendar events.
 - There is one master Google Form, where any of the seven available vehicles can be reserved, and a separate Google Form for each vehicle.
 - Responses for these Google Forms are all combined into one master sheet and processed at once.
@@ -20,3 +20,6 @@ FEATURES:
 - Notes conflicts between events, denies new entries that conflict with existing ones.
 - Generates unique request numbers for each entry.
 - Sends HTML-formatted emails to requestors notifying them that the reservation was either accepted, denied, or invalid.
+
+NOTES:
+- Names in master_sheet.csv have been blanked out to protect employee privacy.
